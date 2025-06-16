@@ -17,12 +17,12 @@ const App = () => {
     <Toaster/>
       {!isadminRoute && <Navbar />}
       <Routes>
-        <Route path="='/"element={<Home/>} />
-        <Route path="='/movies"element={<Movies/>} />
-        <Route path="='/movies/:id"element={<Moviedetails/>} />
-        <Route path="='/movies/:id/:date"element={<Seatlayout/>} />
-        <Route path="='/my-bookings"element={<Mybookings/>} />
-        <Route path="='/favorite"element={<Favorite/>} />
+        <Route path="/"element={<Home/>} />
+        <Route path="/movies"element={<Movies/>} />
+        <Route path="/movies/:id"element={<Moviedetails/>} />
+        <Route path="/movies/:id/:date"element={<Seatlayout/>} />
+        <Route path="/my-bookings"element={<Mybookings/>} />
+        <Route path="/favorite"element={<Favorite/>} />
       </Routes>
       {!isadminRoute && <Footer/>}
     </>
