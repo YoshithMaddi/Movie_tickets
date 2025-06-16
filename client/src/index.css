@@ -2,13 +2,11 @@
 
 @import "tailwindcss";
 
-/* Custom CSS Variables */
-:root {
-  --color-primary: #F84565;
+@theme{
+  --color-primary: #F84566;
   --color-primary-dull: #D63854;
 }
 
-/* Apply global styles */
 * {
   font-family: 'Outfit', sans-serif;
   scrollbar-width: thin;

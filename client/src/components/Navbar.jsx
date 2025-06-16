@@ -1,28 +1,125 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
-import {MenuIcon,SearchIcon,X,XIcon} from 'lucide-react'
+import { MenuIcon, SearchIcon, TicketPlus, XIcon } from "lucide-react";
+import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
+
 const Navbar = () => {
-  // const 
+  const [isOpen, setisOpen] = useState(false);
+  const { user } = useUser();
+  const { openSignIn } = useClerk();
+  const navigate = useNavigate();
+
   return (
     <div className="fixed top-0 left-0 z-50 w-full flex items-center justify-between px-6 md:px-16 lg:px-36 py-5">
-      <Link to='/' className="max-md:flex-1">
-        <img src={assets.logo} alt="" className="w-36 h-auto"/>
+      {/* Logo */}
+      <Link to="/" className="max-md:flex-1">
+        <img src={assets.logo} alt="Logo" className="w-36 h-auto" />
       </Link>
-      <div className="max-md:absolute max-md:top-0 max-md:left-0 max-md:font-medium max-md:text-lg z-50 flex flex-col md:flex-row items-center max-md:justify-center gap-8 min-md:px-8 py-3 max-md:h-screen min-md:rounded-full backdrop-blur bg-black/70 md:bg-white/10 md:border border-gray-300/20 overflow-hidden transition-[width] duration-300">
-        <XIcon className="md:hidden absolute top-6 right-6 w-6 h-6 cursor-pointer"/>
-          <Link to={'/'}>Home</Link>
-          <Link to={'/movies'}>Movies</Link>
-          <Link to={'/'}>Theaters</Link>
-          <Link to={'/'}>Releases</Link>
-          <Link to={'/favorite'}>Favorites</Link>
-      </div>
-      <div className="flex items-center gap-8">
-        <SearchIcon className="max-md:hidden w-6 h-6 cursor-pointer"/>
-        <button className="px-4 py-1 sm:px-7 sm:py-2 bg-primary hover:bg-primary-dull transition rounded-full font-medium cursor-pointer">Login</button>
 
+      {/* Navigation Menu */}
+      <div
+        className={`max-md:absolute max-md:top-0 max-md:left-0 max-md:font-medium max-md:text-lg z-50 flex flex-col md:flex-row items-center max-md:justify-center gap-8 min-md:px-8 py-3 max-md:h-screen min-md:rounded-full backdrop-blur bg-black/70 md:bg-white/10 md:border border-gray-300/20 overflow-hidden transition-[width] duration-300 ${
+          isOpen ? "max-md:w-full" : "max-md:w-0"
+        }`}
+      >
+        <XIcon
+          onClick={() => setisOpen(false)}
+          className="md:hidden absolute top-6 right-6 w-6 h-6 cursor-pointer"
+        />
+        <Link
+          onClick={() => {
+            scrollTo(0, 0);
+            setisOpen(false);
+          }}
+          to="/"
+        >
+          Home
+        </Link>
+        <Link
+          onClick={() => {
+            scrollTo(0, 0);
+            setisOpen(false);
+          }}
+          to="/movies"
+        >
+          Movies
+        </Link>
+        <Link
+          onClick={() => {
+            scrollTo(0, 0);
+            setisOpen(false);
+          }}
+          to="/"
+        >
+          Theaters
+        </Link>
+        <Link
+          onClick={() => {
+            scrollTo(0, 0);
+            setisOpen(false);
+          }}
+          to="/"
+        >
+          Releases
+        </Link>
+        <Link
+          onClick={() => {
+            scrollTo(0, 0);
+            setisOpen(false);
+          }}
+          to="/favorite"
+        >
+          Favorites
+        </Link>
+
+        {/* ✅ Show My Bookings in mobile menu if logged in */}
+        {user && (
+          <Link
+            onClick={() => {
+              scrollTo(0, 0);
+              setisOpen(false);
+            }}
+            to="/my-bookings"
+          >
+            My Bookings
+          </Link>
+        )}
       </div>
-      <MenuIcon className="max-md:ml-4 md:hidden w-8 h-8 cursor-pointer"/>
+``
+      {/* Right Side Controls */}
+      <div className="flex items-center gap-4">
+        <SearchIcon className="max-md:hidden w-6 h-6 cursor-pointer" />
+
+        {!user ? (
+          <button
+            onClick={openSignIn}
+            className="px-4 py-1 sm:px-7 sm:py-2 bg-primary hover:bg-primary-dull transition rounded-full font-medium cursor-pointer"
+          >
+            Login
+          </button>
+        ) : (
+          <>
+            {/* ✅ Desktop "My Bookings" Button */}
+            <button
+              onClick={() => navigate("/my-bookings")}
+              className="hidden sm:flex md:px-4 md:py-2 px-2 py-2 bg-primary hover:bg-primary-dull transition rounded-full font-medium items-center gap-2"
+            >
+              <TicketPlus size={16} />
+              <span className="hidden md:inline lg:hidden">Bookings</span>
+              <span className="hidden lg:inline">My Bookings</span>
+            </button>
+
+            <UserButton afterSignOutUrl="/" />
+          </>
+        )}
+      </div>
+
+      {/* Mobile Menu Icon */}
+      <MenuIcon
+        onClick={() => setisOpen(!isOpen)}
+        className="max-md:ml-4 md:hidden w-8 h-8 cursor-pointer"
+      />
     </div>
   );
 };
