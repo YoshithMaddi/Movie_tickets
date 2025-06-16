@@ -4,9 +4,10 @@ import googlePlay from './googlePlay.svg'
 import appStore from './appStore.svg'
 import screenImage from './screenImage.svg'
 import profile from './profile.png'
-
+import logo_final from './logo_red_no.svg'
 export const assets = {
     logo,
+    logo_final,
     marvelLogo,
     googlePlay,
     appStore,
