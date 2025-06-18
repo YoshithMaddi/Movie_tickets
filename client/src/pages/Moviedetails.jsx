@@ -3,9 +3,12 @@ import { dummyDateTimeData, dummyShowsData } from '../assets/assets';
 import Blurcircle from '../components/Blurcircle';
 import { Heart, PlayCircle, StarIcon } from 'lucide-react';
 import timeFormat from '../lib/time';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import Dataselect from '../components/Dataselect';
+import Moviecard from '../components/Moviecard';
 
 const Moviedetails = () => {
+  const navigate =useNavigate()
   const {id}=useParams()
   const [show,setshow] =useState(null);
   const getshow = async()=>{
@@ -58,6 +61,17 @@ const Moviedetails = () => {
 
         </div>
 
+      </div>
+      <Dataselect dateTime={show.dateTime} id={id}/>
+      <p className='text-lg font-medium mt-20 mb-8'>You may also like</p>
+      <div className='flex flex-wrap max-sm:justify-center gap-8'>
+           {dummyShowsData.slice(0,4).map((movie,ind)=>(
+            <Moviecard key={ind} movie={movie} />
+           ))} 
+      </div>
+      <div className='flex justify-center mt-20'>
+          <button onClick={()=>{navigate('/movies'); window.scrollTo(0, 0);}} className='px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-md font-medium cursor-pointer'> Show more
+          </button>
       </div>
     </div>
   ):(
