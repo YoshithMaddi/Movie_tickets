@@ -86,7 +86,7 @@ const Navbar = () => {
           </Link>
         )}
       </div>
-``
+
       {/* Right Side Controls */}
       <div className="flex items-center gap-4">
         <SearchIcon className="max-md:hidden w-6 h-6 cursor-pointer" />
