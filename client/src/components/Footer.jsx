@@ -1,8 +1,11 @@
 import React from 'react';
 import { assets } from "../assets/assets";
+import Blurcircle from './Blurcircle';
 const Footer = () => {
     return (
         <footer className="px-6 md:px-16 lg:px-36 mt-40 w-full text-gray-300">
+              {/* <footer className="relative bg-[#0f0f0f]/80 px-6 md:px-16 lg:px-36 mt-40 w-full text-gray-300"> */}
+
             <div className="flex flex-col md:flex-row justify-between w-full gap-10 border-b border-gray-500 pb-14">
                 <div className="md:max-w-96">
                     <img className="w-36 h-auto" src={assets.logo_final} alt="logo" />
@@ -14,6 +17,7 @@ const Footer = () => {
                         <img src={assets.appStore} alt="app store" className="h-9 w-auto" />
                     </div>
                 </div>
+                <Blurcircle right='220px' bottom='320px'/>
                 <div className="flex-1 flex items-start md:justify-end gap-20 md:gap-40">
                     <div>
                         <h2 className="font-semibold mb-5">Mytickets</h2>
