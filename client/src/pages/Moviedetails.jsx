@@ -6,6 +6,7 @@ import timeFormat from '../lib/time';
 import { useNavigate, useParams } from 'react-router-dom';
 import Dataselect from '../components/Dataselect';
 import Moviecard from '../components/Moviecard';
+import Loading from '../components/Loading';
 
 const Moviedetails = () => {
   const navigate =useNavigate()
@@ -13,10 +14,13 @@ const Moviedetails = () => {
   const [show,setshow] =useState(null);
   const getshow = async()=>{
     const show= dummyShowsData.find(show=>show._id === id)
-    setshow({
-      movie:show,
-      dateTime:dummyDateTimeData
-    })
+    if(show){
+      setshow({
+        movie:show,
+        dateTime:dummyDateTimeData
+      })
+    }
+
   }
   useEffect(()=>{
     getshow()
@@ -75,7 +79,7 @@ const Moviedetails = () => {
       </div>
     </div>
   ):(
-    <div>Loading...</div>
+    <div><Loading/></div>
   )
 }
 
