@@ -56,6 +56,37 @@ const Addshows = () => {
     });
   };
 
+  const handleSubmit = () => {
+    if (!selectedMovie) {
+      alert("Please select a movie.");
+      return;
+    }
+
+    if (!showPrice || isNaN(showPrice)) {
+      alert("Please enter a valid price.");
+      return;
+    }
+
+    if (Object.keys(dateTimeSelection).length === 0) {
+      alert("Please add at least one date-time slot.");
+      return;
+    }
+
+    const showData = {
+      movieId: selectedMovie,
+      price: showPrice,
+      timings: dateTimeSelection,
+    };
+
+    console.log("Show Registered:", showData);
+    alert("Show successfully registered!");
+
+    // Reset form (optional)
+    setSelectedMovie(null);
+    setShowPrice("");
+    setDateTimeSelection({});
+  };
+
   return nowPlayingMovies.length > 0 ? (
     <>
       <Title text1="Add" text2="Shows" />
@@ -65,7 +96,7 @@ const Addshows = () => {
         {nowPlayingMovies.map((movie) => (
           <div
             key={movie.id}
-            className={`relative max-w-40 cursor-pointer group-hover:not-hover:opacity-40 hover:-translate-y-1 transition duration-300`}
+            className={`relative max-w-40 cursor-pointer hover:opacity-80 hover:-translate-y-1 transition duration-300`}
             onClick={() => setSelectedMovie(movie.id)}
           >
             <div className="relative rounded-lg overflow-hidden">
@@ -122,6 +153,7 @@ const Addshows = () => {
         <div className="inline-flex gap-5 border border-gray-600 p-1 pl-3 rounded-lg">
           <input
             type="datetime-local"
+            min={new Date().toISOString().slice(0, 16)}
             value={dateTimeInput}
             onChange={(e) => setDateTimeInput(e.target.value)}
             className="outline-none rounded-md bg-transparent text-sm"
@@ -163,6 +195,14 @@ const Addshows = () => {
           </ul>
         </div>
       )}
+
+      {/* Submit Button */}
+      <button
+        onClick={handleSubmit}
+        className="bg-primary text-white px-8 py-2 mt-6 rounded hover:bg-primary/90 transition-all cursor-pointer"
+      >
+        Register Show
+      </button>
     </>
   ) : (
     <Loading />
