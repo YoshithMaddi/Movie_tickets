@@ -1,6 +1,7 @@
-import { User } from "@clerk/express";
-import { Inngest, InngestFunction } from "inngest";
+import { Inngest } from "inngest";
+import User  from "../models/User.js";
 export const inngest = new Inngest({ id: "Movie-ticket-booking" });
+
 
 // inngest func to save user data to a database
 const syncUserCreation=inngest.createFunction(
