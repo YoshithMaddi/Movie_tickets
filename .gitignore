@@ -1,17 +1,17 @@
 node_modules
 
-# Ignore environment files
+# ignore environment files
 **/.env
 
-# Ignore node modules
+# ignore node modules
 node_modules/
 
-# Ignore logs
+# ignore logs
 logs
 *.log
 npm-debug.log*
 
-# Ignore Vercel and local dev files
+# ignore vercel and local dev files
 .vercel
 .vscode/
 .DS_Store
